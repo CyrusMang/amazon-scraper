@@ -17,7 +17,7 @@ def getLinks (f, url) :
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     product_image_containers = soup.find_all("span", {"data-component-type": "s-product-image"})
     for container in product_image_containers:
-        f.write(root_url + container.find("a")["href"] + "\n")
+        f.write(root_url + container.find("a")["href"] + "," + words[0] + "\n")
     print('Sleeping ...')
     sleep(2)
     next_page = soup.find("a", {"class": "s-pagination-next"})
@@ -27,6 +27,7 @@ def getLinks (f, url) :
     else:
         print('End')
 
-f = open("product_lists.csv", "w", encoding='utf-8')
-
-getLinks(f, root_url + "/s?k=" + words[0])
+for word in words:
+    f = open("product_lists_" + word + "_" + strftime("%Y-%m-%d-%H-%M-%S", gmtime()) + ".csv", "w", encoding='utf-8')
+    getLinks(f, root_url + "/s?k=" + word)
+    sleep(4)

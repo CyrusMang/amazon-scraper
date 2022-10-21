@@ -28,6 +28,6 @@ def getLinks (f, url) :
         print('End')
 
 for word in words:
-    f = open("product_lists_" + word + "_" + strftime("%Y-%m-%d-%H-%M-%S", gmtime()) + ".csv", "w", encoding='utf-8')
+    f = open("product_lists_" + strftime("%Y-%m-%d-%H-%M-%S", gmtime()) + ".csv", "w", encoding='utf-8')
     getLinks(f, root_url + "/s?k=" + word)
     sleep(4)
